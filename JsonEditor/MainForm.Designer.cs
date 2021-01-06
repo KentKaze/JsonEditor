@@ -39,6 +39,9 @@
             this.tmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdMain = new System.Windows.Forms.OpenFileDialog();
             this.fbdMain = new System.Windows.Forms.FolderBrowserDialog();
+            this.button1 = new System.Windows.Forms.Button();
+            this.trvJsonFiles = new System.Windows.Forms.TreeView();
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.mspMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,11 +119,38 @@
             // 
             this.ofdMain.FileName = "openFileDialog1";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1045, 614);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(185, 93);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // trvJsonFiles
+            // 
+            this.trvJsonFiles.Location = new System.Drawing.Point(12, 40);
+            this.trvJsonFiles.Name = "trvJsonFiles";
+            this.trvJsonFiles.Size = new System.Drawing.Size(211, 302);
+            this.trvJsonFiles.TabIndex = 3;
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.AutoScroll = true;
+            this.pnlMain.Location = new System.Drawing.Point(248, 40);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(402, 652);
+            this.pnlMain.TabIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 743);
+            this.Controls.Add(this.pnlMain);
+            this.Controls.Add(this.trvJsonFiles);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.sspMain);
             this.Controls.Add(this.mspMain);
             this.MainMenuStrip = this.mspMain;
@@ -147,6 +177,9 @@
         private System.Windows.Forms.ToolStripMenuItem tmiExit;
         private System.Windows.Forms.OpenFileDialog ofdMain;
         private System.Windows.Forms.FolderBrowserDialog fbdMain;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TreeView trvJsonFiles;
+        private System.Windows.Forms.Panel pnlMain;
     }
 }
 
