@@ -65,7 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ForeignKey.cs" />
-    <Compile Include="JSONLink.cs" />
+    <Compile Include="JColumn.cs" />
+    <Compile Include="JLine.cs" />
+    <Compile Include="JLink.cs" />
+    <Compile Include="JTable.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

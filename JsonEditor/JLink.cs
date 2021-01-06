@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace JsonEditor
 {
-    public class JSONLink
+    public class JLink
     {
         public string JSONName { get; set; }
-        public string KeyName { get; set; }
+        public string KeyName { get; set; }        
         public List<ForeignKey> ForeignKeys { get; set; }
     }
 }

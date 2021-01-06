@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using System.Reflection;
-using System.Collections;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace JsonEditor
 {
@@ -13,15 +11,15 @@ namespace JsonEditor
     {
         const string linkFileName = "JSONLink.json";
         private Dictionary<string, object> data;
-        private JSONLink jl;
-
-        private List<string> currentColumns;
-        private List<Type> currentTypes;
+        private List<JLink> jl;
+        private Dictionary<string, JTable> tables;
 
         public MainForm()
         {
             InitializeComponent();
             data = new Dictionary<string, object>();
+            jl = new List<JLink>();
+            
         }
 
         private void tmiExit_Click(object sender, EventArgs e)
@@ -38,77 +36,63 @@ namespace JsonEditor
             if (dr == DialogResult.OK)
             {
                 string[] jsonfiles = Directory.GetFiles(fbdMain.SelectedPath, "*.json");
-
+                tables = new Dictionary<string, JTable>();
                 foreach (string file in jsonfiles)
                 {
                     using (FileStream fs = new FileStream(file, FileMode.Open))
                     {
                         StreamReader sr = new StreamReader(fs);
                         if (file == Path.Combine(fbdMain.SelectedPath, linkFileName))
-                            jl = JsonConvert.DeserializeObject<JSONLink>(sr.ReadToEnd());
+                            jl = JsonConvert.DeserializeObject<List<JLink>>(sr.ReadToEnd());
                         else
-                            data.Add(Path.GetFileNameWithoutExtension(file), JsonConvert.DeserializeObject(sr.ReadToEnd()));
+                        {
+                            //data.Add(Path.GetFileNameWithoutExtension(file), JsonConvert.DeserializeObject(sr.ReadToEnd()));
+                            tables.Add(Path.GetFileNameWithoutExtension(file), new JTable(Path.GetFileNameWithoutExtension(file), JsonConvert.DeserializeObject(sr.ReadToEnd())));
+                        }
                         sr.Close();
                     }
                 }
+                
+                
+                //foreach (KeyValuePair<string, object> kvp in data)
+                //{
+                //    JTable jTable = new JTable { Name = kvp.Key };
+
+
+                //    JArray jr = kvp.Value as JArray;
+                //    JToken jt = jr.First as JToken;
+
+                //    JObject jo = jt as JObject;
+                //    foreach (KeyValuePair<string, JToken> kvp2 in jo)
+                //    {
+                //        //FileNode.Nodes.Add(new TreeNode(kvp2.Key));
+                //    }
+
+                //}
+
                 RefreshUI();
-                sspMain.Text = $"{data.Count} 檔案已讀入";
-                //MessageBox.Show("Files found: " + jsonfiles.Length.ToString(), "Message");
+                sspMain.Text = $"{data.Count} 檔案已讀入";                
             }
         }
 
         private void RefreshUI()
         {
             //Refresh Tree
-            
+            TreeNode FileNode;
             trvJsonFiles.Nodes.Clear();
-            currentColumns = new List<string>();
-            currentTypes = new List<Type>();
 
-            foreach (object o in data)
+            foreach (KeyValuePair<string, object> kvp in data)
             {
-                JArray jr = o as JArray;
-                
-                foreach (JToken jt in jr)
+                FileNode = new TreeNode(kvp.Key);
+                trvJsonFiles.Nodes.Add(FileNode);
+                JArray jr = kvp.Value as JArray;
+                JToken jt = jr.First as JToken;
+
+                JObject jo = jt as JObject;
+                foreach (KeyValuePair<string, JToken> kvp2 in jo)
                 {
-                    JObject jo = jt as JObject;                    
-                    foreach(KeyValuePair<string, JToken> kvp in jo)
-                    {
-
-                        //MessageBox.Show(kvp.Key);
-                        //MessageBox.Show(kvp.Value.ToString());
-                        trvJsonFiles.Nodes.Add(new TreeNode($"{kvp.Key}"));
-                    }
-                    ////IEnumerable<JProperty> jps = ((JObject)jt).Properties();
-
-                    //foreach (JProperty jp in jps)
-                    //{
-                    //    MessageBox.Show(jp.Name);
-                    //}
-                    ////MessageBox.Show((jt as JObject).Properties());
-                    //foreach(JToken jt2 in jt)
-                    //{
-                    //    foreach (JToken jt3 in jt2)
-                    //        MessageBox.Show(jt3.ToString());
-                    //}
+                    FileNode.Nodes.Add(new TreeNode(kvp2.Key));
                 }
-
-
-                //foreach(JObject o2 in (o as JArray))
-                //{
-                //    //currentColumns
-                //    FieldInfo[] fis =  o2.GetType().GetFields();
-                //    foreach(FieldInfo fi in fis)
-                //    {
-                //        if(!currentColumns.Contains(fi.Name))
-                //        {
-                //            currentTypes.Add(fi.FieldType);
-                //            currentColumns.Add(fi.Name);
-                //        }
-                //        trvJsonFiles.Nodes.Add(new TreeNode($"{fi.Name}: {fi.GetValue(o2)}"));
-                //    }
-                //}
-
 
             }
             //TreeNode tn = new TreeNode("");
