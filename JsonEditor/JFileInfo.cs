@@ -11,6 +11,5 @@ namespace JsonEditor
         public string Name { get; set; }
         public string Key { get; set; } 
         public List<JColumn> Columns { get; set; }
-        //public List<ForeignKey> ForeignKeys { get; set; }
     }
 }

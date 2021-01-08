@@ -33,10 +33,10 @@
             this.sspMain = new System.Windows.Forms.StatusStrip();
             this.mspMain = new System.Windows.Forms.MenuStrip();
             this.tmiFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tmiNewJsonFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmiNewJsonFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.tmiLoadJsonFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tmiLoadJsonFiles = new System.Windows.Forms.ToolStripMenuItem();
-            this.tmiSaveJson = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmiSaveJsonFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.tmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdMain = new System.Windows.Forms.OpenFileDialog();
@@ -58,13 +58,23 @@
             this.chbDisplay = new System.Windows.Forms.CheckBox();
             this.btnForeignKey = new System.Windows.Forms.Button();
             this.txtForeigney = new System.Windows.Forms.TextBox();
+            this.tmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.sslMain = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tmiSaveJsonFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tmiNewJsonFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmiDeleteJsonFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.sspMain.SuspendLayout();
             this.mspMain.SuspendLayout();
             this.pnlFielInfo.SuspendLayout();
+            this.cmsMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // sspMain
             // 
             this.sspMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.sspMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sslMain});
             this.sspMain.Location = new System.Drawing.Point(0, 721);
             this.sspMain.Name = "sspMain";
             this.sspMain.Size = new System.Drawing.Size(1275, 22);
@@ -75,7 +85,8 @@
             // 
             this.mspMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mspMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tmiFile});
+            this.tmiFile,
+            this.tmiAbout});
             this.mspMain.Location = new System.Drawing.Point(0, 0);
             this.mspMain.Name = "mspMain";
             this.mspMain.Size = new System.Drawing.Size(1275, 28);
@@ -85,41 +96,42 @@
             // tmiFile
             // 
             this.tmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tmiNewJsonFile,
+            this.tmiNewJsonFiles,
             this.tmiLoadJsonFile,
             this.tmiLoadJsonFiles,
-            this.tmiSaveJson,
+            this.tmiSaveJsonFile,
+            this.tmiSaveJsonFiles,
             this.toolStripMenuItem1,
             this.tmiExit});
             this.tmiFile.Name = "tmiFile";
             this.tmiFile.Size = new System.Drawing.Size(51, 24);
             this.tmiFile.Text = "檔案";
             // 
-            // tmiNewJsonFile
+            // tmiNewJsonFiles
             // 
-            this.tmiNewJsonFile.Name = "tmiNewJsonFile";
-            this.tmiNewJsonFile.Size = new System.Drawing.Size(216, 26);
-            this.tmiNewJsonFile.Text = "新Json";
+            this.tmiNewJsonFiles.Name = "tmiNewJsonFiles";
+            this.tmiNewJsonFiles.Size = new System.Drawing.Size(216, 26);
+            this.tmiNewJsonFiles.Text = "新建JSON資料夾";
             // 
             // tmiLoadJsonFile
             // 
             this.tmiLoadJsonFile.Name = "tmiLoadJsonFile";
             this.tmiLoadJsonFile.Size = new System.Drawing.Size(216, 26);
-            this.tmiLoadJsonFile.Text = "讀取Json";
+            this.tmiLoadJsonFile.Text = "讀取JSON檔案";
             // 
             // tmiLoadJsonFiles
             // 
             this.tmiLoadJsonFiles.Name = "tmiLoadJsonFiles";
             this.tmiLoadJsonFiles.Size = new System.Drawing.Size(216, 26);
-            this.tmiLoadJsonFiles.Text = "讀取Json資料夾";
+            this.tmiLoadJsonFiles.Text = "讀取JSON資料夾";
             this.tmiLoadJsonFiles.Click += new System.EventHandler(this.tmiLoadJsonDirectory_Click);
             // 
-            // tmiSaveJson
+            // tmiSaveJsonFile
             // 
-            this.tmiSaveJson.Name = "tmiSaveJson";
-            this.tmiSaveJson.Size = new System.Drawing.Size(216, 26);
-            this.tmiSaveJson.Text = "存檔";
-            this.tmiSaveJson.Click += new System.EventHandler(this.tmiSaveJson_Click);
+            this.tmiSaveJsonFile.Name = "tmiSaveJsonFile";
+            this.tmiSaveJsonFile.Size = new System.Drawing.Size(216, 26);
+            this.tmiSaveJsonFile.Text = "存取JSON檔案";
+            this.tmiSaveJsonFile.Click += new System.EventHandler(this.tmiSaveJson_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -139,6 +151,7 @@
             // 
             // trvJsonFiles
             // 
+            this.trvJsonFiles.ContextMenuStrip = this.cmsMain;
             this.trvJsonFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trvJsonFiles.ImageIndex = 0;
             this.trvJsonFiles.ImageList = this.imlMain;
@@ -197,11 +210,12 @@
             // 
             // btnUpdateFileInfo
             // 
+            this.btnUpdateFileInfo.Enabled = false;
             this.btnUpdateFileInfo.Location = new System.Drawing.Point(168, 663);
             this.btnUpdateFileInfo.Name = "btnUpdateFileInfo";
             this.btnUpdateFileInfo.Size = new System.Drawing.Size(122, 40);
             this.btnUpdateFileInfo.TabIndex = 7;
-            this.btnUpdateFileInfo.Text = "Update";
+            this.btnUpdateFileInfo.Text = "更新";
             this.btnUpdateFileInfo.UseVisualStyleBackColor = true;
             this.btnUpdateFileInfo.Click += new System.EventHandler(this.btnUpdateFileInfo_Click);
             // 
@@ -307,6 +321,46 @@
             this.txtForeigney.Size = new System.Drawing.Size(101, 27);
             this.txtForeigney.TabIndex = 8;
             // 
+            // tmiAbout
+            // 
+            this.tmiAbout.Name = "tmiAbout";
+            this.tmiAbout.Size = new System.Drawing.Size(51, 24);
+            this.tmiAbout.Text = "關於";
+            this.tmiAbout.Click += new System.EventHandler(this.tmiAbout_Click);
+            // 
+            // sslMain
+            // 
+            this.sslMain.Name = "sslMain";
+            this.sslMain.Size = new System.Drawing.Size(0, 17);
+            // 
+            // tmiSaveJsonFiles
+            // 
+            this.tmiSaveJsonFiles.Name = "tmiSaveJsonFiles";
+            this.tmiSaveJsonFiles.Size = new System.Drawing.Size(216, 26);
+            this.tmiSaveJsonFiles.Text = "存取JSON資料夾";
+            // 
+            // cmsMain
+            // 
+            this.cmsMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tmiNewJsonFile,
+            this.tmiDeleteJsonFile});
+            this.cmsMain.Name = "cmsMain";
+            this.cmsMain.Size = new System.Drawing.Size(174, 52);
+            // 
+            // tmiNewJsonFile
+            // 
+            this.tmiNewJsonFile.Name = "tmiNewJsonFile";
+            this.tmiNewJsonFile.Size = new System.Drawing.Size(173, 24);
+            this.tmiNewJsonFile.Text = "新增JSON檔案";
+            this.tmiNewJsonFile.Click += new System.EventHandler(this.tmiNewJsonFile_Click);
+            // 
+            // tmiDeleteJsonFile
+            // 
+            this.tmiDeleteJsonFile.Name = "tmiDeleteJsonFile";
+            this.tmiDeleteJsonFile.Size = new System.Drawing.Size(173, 24);
+            this.tmiDeleteJsonFile.Text = "刪除JSON檔案";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -323,10 +377,13 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "JSON 資料檔案編輯器";
+            this.sspMain.ResumeLayout(false);
+            this.sspMain.PerformLayout();
             this.mspMain.ResumeLayout(false);
             this.mspMain.PerformLayout();
             this.pnlFielInfo.ResumeLayout(false);
             this.pnlFielInfo.PerformLayout();
+            this.cmsMain.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,10 +394,10 @@
         private System.Windows.Forms.StatusStrip sspMain;
         private System.Windows.Forms.MenuStrip mspMain;
         private System.Windows.Forms.ToolStripMenuItem tmiFile;
-        private System.Windows.Forms.ToolStripMenuItem tmiNewJsonFile;
+        private System.Windows.Forms.ToolStripMenuItem tmiNewJsonFiles;
         private System.Windows.Forms.ToolStripMenuItem tmiLoadJsonFile;
         private System.Windows.Forms.ToolStripMenuItem tmiLoadJsonFiles;
-        private System.Windows.Forms.ToolStripMenuItem tmiSaveJson;
+        private System.Windows.Forms.ToolStripMenuItem tmiSaveJsonFile;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem tmiExit;
         private System.Windows.Forms.OpenFileDialog ofdMain;
@@ -362,6 +419,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem tmiAbout;
+        private System.Windows.Forms.ToolStripStatusLabel sslMain;
+        private System.Windows.Forms.ToolStripMenuItem tmiSaveJsonFiles;
+        private System.Windows.Forms.ContextMenuStrip cmsMain;
+        private System.Windows.Forms.ToolStripMenuItem tmiNewJsonFile;
+        private System.Windows.Forms.ToolStripMenuItem tmiDeleteJsonFile;
     }
 }
 

@@ -92,7 +92,7 @@ namespace JsonEditor
                     fileNode.Nodes.Add(new TreeNode($"FK:{kvp.Key} -> {kvp.Value}", 1, 1));
                 trvJsonFiles.Nodes.Add(fileNode);
             }            
-         
+            
         }
 
         private void RefreshLibLinesUI()
@@ -118,11 +118,24 @@ namespace JsonEditor
 
         private void RefreshPnlFileInfoUI()
         {
-            cobColumnType.SelectedIndex = cobColumnType.Items.IndexOf(selectedColumn.Type);
-            txtColumnName.Text = selectedColumn.Name;
-            chbDisplay.Checked = selectedColumn.Display;
-            chbIsKey.Checked = selectedColumn.IsKey;
-            txtForeigney.Text = selectedColumn.ForeignKey;
+            if(selectedColumn != null)
+            {
+                cobColumnType.SelectedIndex = cobColumnType.Items.IndexOf(selectedColumn.Type);
+                txtColumnName.Text = selectedColumn.Name;
+                chbDisplay.Checked = selectedColumn.Display;
+                chbIsKey.Checked = selectedColumn.IsKey;
+                txtForeigney.Text = selectedColumn.ForeignKey;
+                btnUpdateFileInfo.Enabled = true;
+            }
+            else
+            {   
+                txtColumnName.Text = "";
+                cobColumnType.SelectedIndex = -1;
+                chbDisplay.Checked = false;
+                chbIsKey.Checked = false;
+                txtForeigney.Text = "";
+                btnUpdateFileInfo.Enabled = false;
+            }
         }
 
         private void tmiSaveJson_Click(object sender, EventArgs e)
@@ -136,11 +149,14 @@ namespace JsonEditor
             if (e.Node.Parent == null)           
             {
                 selectedTable = tables[e.Node.Tag.ToString()];
+                selectedColumn = null;
                 RefreshLibLinesUI();
+                RefreshPnlFileInfoUI();
             }
             else
             {   
-                selectedColumn = tables[e.Node.Parent.Tag.ToString()].Columns.Find(t => t.Name == e.Node.Tag.ToString());                
+                selectedColumn = tables[e.Node.Parent.Tag.ToString()].Columns.Find(t => t.Name == e.Node.Tag.ToString());
+                btnUpdateFileInfo.Enabled = true;
                 RefreshPnlFileInfoUI();
             }
         }
@@ -152,10 +168,26 @@ namespace JsonEditor
 
         private void btnUpdateFileInfo_Click(object sender, EventArgs e)
         {
-
+            selectedColumn.Type = cobColumnType.SelectedValue.ToString();
+            selectedColumn.Name = txtColumnName.Text;
+            selectedColumn.Display = chbDisplay.Checked;
+            selectedColumn.IsKey = chbIsKey.Checked;
+            selectedColumn.ForeignKey = txtForeigney.Text;
+            sslMain.Text = $"欄位「{selectedColumn.Name}」已更新";
+            RefreshJsonFilesUI();
         }
 
         private void trvJsonFiles_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+        private void tmiAbout_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("JSON 資料檔案編輯器 0.1\n\n Created by KentKaze", "關於", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tmiNewJsonFile_Click(object sender, EventArgs e)
         {
 
         }
