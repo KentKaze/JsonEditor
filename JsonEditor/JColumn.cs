@@ -11,11 +11,15 @@ namespace JsonEditor
     {
         public string Name { get; set; }
         public bool IsKey { get; set; }
-        public JTable ForeignKey { get; set; }
+        public string Type { get; set; }
+        public string ForeignKey { get; set; }
 
-        public static implicit operator JColumn(JObject data)
+        public JColumn(string name, string type, bool isKey = false, string fk = null)
         {
-            return new JColumn();
+            Name = name;
+            IsKey = isKey;
+            Type = type;
+            ForeignKey = fk;
         }
     }
 }

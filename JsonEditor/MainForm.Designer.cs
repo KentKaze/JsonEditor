@@ -42,6 +42,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.trvJsonFiles = new System.Windows.Forms.TreeView();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.trvJsonTables = new System.Windows.Forms.TreeView();
             this.mspMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,6 +103,7 @@
             this.tmiSaveJson.Name = "tmiSaveJson";
             this.tmiSaveJson.Size = new System.Drawing.Size(216, 26);
             this.tmiSaveJson.Text = "存檔";
+            this.tmiSaveJson.Click += new System.EventHandler(this.tmiSaveJson_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -121,7 +123,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1045, 614);
+            this.button1.Location = new System.Drawing.Point(12, 599);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(185, 93);
             this.button1.TabIndex = 2;
@@ -132,22 +134,30 @@
             // 
             this.trvJsonFiles.Location = new System.Drawing.Point(12, 40);
             this.trvJsonFiles.Name = "trvJsonFiles";
-            this.trvJsonFiles.Size = new System.Drawing.Size(211, 302);
+            this.trvJsonFiles.Size = new System.Drawing.Size(278, 302);
             this.trvJsonFiles.TabIndex = 3;
             // 
             // pnlMain
             // 
             this.pnlMain.AutoScroll = true;
-            this.pnlMain.Location = new System.Drawing.Point(248, 40);
+            this.pnlMain.Location = new System.Drawing.Point(685, 40);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(402, 652);
             this.pnlMain.TabIndex = 4;
+            // 
+            // trvJsonTables
+            // 
+            this.trvJsonTables.Location = new System.Drawing.Point(296, 40);
+            this.trvJsonTables.Name = "trvJsonTables";
+            this.trvJsonTables.Size = new System.Drawing.Size(376, 652);
+            this.trvJsonTables.TabIndex = 5;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 743);
+            this.Controls.Add(this.trvJsonTables);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.trvJsonFiles);
             this.Controls.Add(this.button1);
@@ -180,6 +190,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TreeView trvJsonFiles;
         private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.TreeView trvJsonTables;
     }
 }
 

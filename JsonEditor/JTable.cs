@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime;
 
 namespace JsonEditor
 {
@@ -73,13 +74,15 @@ namespace JsonEditor
 
         public JTable(string name, object jArray)
         {
+            bool isFirst = true;
+
             Name = name;
             if (jArray == null)
                 return;
 
-            JArray jr = jArray as JArray;
+            JArray jr = jArray as JArray;            
             if (jr == null)
-                throw new System.Exception();
+                throw new ArgumentNullException();
 
             foreach (JToken jt in jr)
             {
@@ -87,9 +90,11 @@ namespace JsonEditor
                 JObject jo = jt as JObject;
                 foreach (KeyValuePair<string, JToken> kvp in jo)
                 {
+                    if(isFirst)
+                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToString()));                    
                     switch (kvp.Value.Type)
                     {
-                        case JTokenType.Integer:
+                        case JTokenType.Integer:                            
                             items.Add(kvp.Key, Convert.ToInt32(kvp.Value));
                             break;
                         case JTokenType.Float:
@@ -112,11 +117,13 @@ namespace JsonEditor
                             break;
                     }
                 }
+                isFirst = false;
                 Lines.Add(items);
-
             }
 
         }
+
+
         //public static implicit operator JTable(JArray data)
         //{
         //    JTable result = new JTable();
