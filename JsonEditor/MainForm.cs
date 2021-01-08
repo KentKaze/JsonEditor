@@ -9,17 +9,18 @@ namespace JsonEditor
 {
     public partial class MainForm : Form
     {
-        const string linkFileName = "JSONLink.json";
+        const string linkFileName = "JFileInfo.json";
         private Dictionary<string, JTable> tables;
         private JColumn selectedColumn;
         private JTable selectedTable;
         private Dictionary<string, object> selectedLine;
+        private string currentFilesPath;
 
         public MainForm()
         {
             InitializeComponent();
-
             cobColumnType.DataSource = Enum.GetNames(typeof(JTokenType));
+            cobColumnType.SelectedIndex = -1;
         }
 
         private void tmiExit_Click(object sender, EventArgs e)
@@ -27,8 +28,12 @@ namespace JsonEditor
             Application.Exit();
         }
 
+        
+
         private void tmiLoadJsonDirectory_Click(object sender, EventArgs e)
         {
+
+
             List<JFileInfo> jfis = new List<JFileInfo>();
 #if DEBUG
             fbdMain.SelectedPath = @"C:\Programs\WinForm\JsonEditor\JsonEditor\TestData";
@@ -36,14 +41,16 @@ namespace JsonEditor
             DialogResult dr = fbdMain.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
-                string[] jsonfiles = Directory.GetFiles(fbdMain.SelectedPath, "*.json");
+                tmiCloseAllJsonFiles_Click(this, e);
+                currentFilesPath = fbdMain.SelectedPath;
+                string[] jsonfiles = Directory.GetFiles(currentFilesPath, "*.json");
                 tables = new Dictionary<string, JTable>();
                 foreach (string file in jsonfiles)
                 {
                     using (FileStream fs = new FileStream(file, FileMode.Open))
                     {
                         StreamReader sr = new StreamReader(fs);
-                        if (file == Path.Combine(fbdMain.SelectedPath, linkFileName))
+                        if (file == Path.Combine(currentFilesPath, linkFileName))
                         {
                             jfis = JsonConvert.DeserializeObject<List<JFileInfo>>(sr.ReadToEnd());
                         }
@@ -57,9 +64,8 @@ namespace JsonEditor
 
                 //有JFileInfo的話相連
                 if (jfis != null)
-                {
-                    //相連
-                }
+                    foreach(JTable jt in tables.Values)
+                        jt.LoadFileInfo(jfis.Find(m => m.Name == jt.Name));
 
                 RefreshJsonFilesUI();
                 sspMain.Text = $"{tables.Count} 檔案已讀入";
@@ -72,11 +78,14 @@ namespace JsonEditor
         }
 
         private void RefreshJsonFilesUI()
-        {
+        {            
+            trvJsonFiles.Nodes.Clear();
+            tmiCloseAllJsonFiles.Enabled = false;
+            if (tables == null)
+                return;
+
             TreeNode fileNode;
             Dictionary<string, string> fks = new Dictionary<string, string>();
-            trvJsonFiles.Nodes.Clear();
-
             foreach (JTable jt in tables.Values)
             {
                 fileNode = new TreeNode(jt.Name, 0, 0);
@@ -91,15 +100,26 @@ namespace JsonEditor
                 foreach (KeyValuePair<string, string> kvp in fks)
                     fileNode.Nodes.Add(new TreeNode($"FK:{kvp.Key} -> {kvp.Value}", 1, 1));
                 trvJsonFiles.Nodes.Add(fileNode);
-            }            
+            }
+
+            tmiCloseAllJsonFiles.Enabled = true;
             
+        }
+
+        private void RefreshPnlMain()
+        {
+
         }
 
         private void RefreshLibLinesUI()
         {
+            libLines.Items.Clear();
+            if (selectedTable == null)
+                return;
+
             List<string> displayColumns = new List<string>();
             string displayString;
-            libLines.Items.Clear();
+            
             foreach (JColumn jc in selectedTable.Columns)
                 if (jc.Display)
                     displayColumns.Add(jc.Name);
@@ -138,12 +158,6 @@ namespace JsonEditor
             }
         }
 
-        private void tmiSaveJson_Click(object sender, EventArgs e)
-        {
-            //存出jfis檔
-            
-        }
-
         private void trvJsonFiles_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {           
             if (e.Node.Parent == null)           
@@ -172,7 +186,7 @@ namespace JsonEditor
             selectedColumn.Name = txtColumnName.Text;
             selectedColumn.Display = chbDisplay.Checked;
             selectedColumn.IsKey = chbIsKey.Checked;
-            selectedColumn.ForeignKey = txtForeigney.Text;
+            selectedColumn.ForeignKey = string.IsNullOrEmpty(txtForeigney.Text) ? txtForeigney.Text : null;
             sslMain.Text = $"欄位「{selectedColumn.Name}」已更新";
             RefreshJsonFilesUI();
         }
@@ -188,6 +202,44 @@ namespace JsonEditor
         }
 
         private void tmiNewJsonFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tmiSaveJsonFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tmiSaveJsonFiles_Click(object sender, EventArgs e)
+        {
+            List<JFileInfo> jfis = new List<JFileInfo>();
+            foreach (JTable jy in tables.Values)
+                jfis.Add(jy.GetJFileInfo());
+
+            //存JSONFileInfo檔
+            using (FileStream fs = new FileStream(Path.Combine(currentFilesPath, linkFileName), FileMode.Create))
+            {
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write(JsonConvert.SerializeObject(jfis, Formatting.Indented));
+                sw.Close();
+            }
+            sslMain.Text = $"{currentFilesPath}..所有檔案已存檔";
+        }
+
+        private void tmiCloseAllJsonFiles_Click(object sender, EventArgs e)
+        {
+            tables = null;
+            currentFilesPath = null;
+            selectedColumn = null;
+            selectedTable = null;
+            selectedLine = null;
+            RefreshJsonFilesUI();
+            RefreshPnlFileInfoUI();
+            RefreshLibLinesUI();
+        }
+
+        private void tmiLoadJsonFile_Click(object sender, EventArgs e)
         {
 
         }

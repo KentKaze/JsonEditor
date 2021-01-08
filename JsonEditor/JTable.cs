@@ -81,7 +81,7 @@ namespace JsonEditor
             if (jArray == null)
                 return;
 
-            JArray jr = jArray as JArray;            
+            JArray jr = jArray as JArray;
             if (jr == null)
                 throw new ArgumentNullException();
 
@@ -91,17 +91,17 @@ namespace JsonEditor
                 JObject jo = jt as JObject;
                 foreach (KeyValuePair<string, JToken> kvp in jo)
                 {
-                    if(isFirstFirst)
-                    { 
+                    if (isFirstFirst)
+                    {
                         Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToString(), false, true));
                         isFirstFirst = false;
                     }
-                    else if(isFirst)
+                    else if (isFirst)
                         Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToString()));
-                    
+
                     switch (kvp.Value.Type)
                     {
-                        case JTokenType.Integer:                            
+                        case JTokenType.Integer:
                             items.Add(kvp.Key, Convert.ToInt32(kvp.Value));
                             break;
                         case JTokenType.Float:
@@ -130,6 +130,37 @@ namespace JsonEditor
 
         }
 
+        /// <summary>
+        /// 讀取JFileInfo檔案設定
+        /// </summary>
+        /// <param name="jfi"></param>
+        public void LoadFileInfo(JFileInfo jfi)
+        {
+            //檢查一下是否正確
+            if (jfi == null)
+                throw new ArgumentNullException();            
+            if (Name != jfi.Name)
+                throw new InvalidCastException();            
+            if (Columns.Count != jfi.Columns.Count)
+                throw new MissingFieldException();
+            for(int i = 0; i < jfi.Columns.Count; i++)
+                if (Columns[i].Name != jfi.Columns[i].Name)
+                    throw new MissingFieldException();
+            Columns = jfi.Columns;
+        }
+
+        /// <summary>
+        /// 擷取JFileInfo檔案內容
+        /// </summary>
+        /// <returns></returns>
+        public JFileInfo GetJFileInfo()
+        {
+            JFileInfo jfi = new JFileInfo();
+            List<JColumn> jcs = new List<JColumn>(Columns);            
+            jfi.Name = Name;
+            jfi.Columns = jcs;
+            return jfi;
+        }
 
         //public static implicit operator JTable(JArray data)
         //{

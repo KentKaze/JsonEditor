@@ -64,6 +64,10 @@
             this.cmsMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tmiNewJsonFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tmiDeleteJsonFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmiCloseAllJsonFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.sspMain.SuspendLayout();
             this.mspMain.SuspendLayout();
             this.pnlFielInfo.SuspendLayout();
@@ -75,9 +79,9 @@
             this.sspMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.sspMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sslMain});
-            this.sspMain.Location = new System.Drawing.Point(0, 721);
+            this.sspMain.Location = new System.Drawing.Point(0, 718);
             this.sspMain.Name = "sspMain";
-            this.sspMain.Size = new System.Drawing.Size(1275, 22);
+            this.sspMain.Size = new System.Drawing.Size(1272, 22);
             this.sspMain.TabIndex = 0;
             this.sspMain.Text = "sspMain";
             // 
@@ -89,7 +93,7 @@
             this.tmiAbout});
             this.mspMain.Location = new System.Drawing.Point(0, 0);
             this.mspMain.Name = "mspMain";
-            this.mspMain.Size = new System.Drawing.Size(1275, 28);
+            this.mspMain.Size = new System.Drawing.Size(1272, 28);
             this.mspMain.TabIndex = 1;
             this.mspMain.Text = "menuStrip1";
             // 
@@ -97,10 +101,14 @@
             // 
             this.tmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tmiNewJsonFiles,
+            this.toolStripMenuItem3,
             this.tmiLoadJsonFile,
             this.tmiLoadJsonFiles,
+            this.toolStripMenuItem4,
             this.tmiSaveJsonFile,
             this.tmiSaveJsonFiles,
+            this.toolStripMenuItem2,
+            this.tmiCloseAllJsonFiles,
             this.toolStripMenuItem1,
             this.tmiExit});
             this.tmiFile.Name = "tmiFile";
@@ -118,6 +126,7 @@
             this.tmiLoadJsonFile.Name = "tmiLoadJsonFile";
             this.tmiLoadJsonFile.Size = new System.Drawing.Size(216, 26);
             this.tmiLoadJsonFile.Text = "讀取JSON檔案";
+            this.tmiLoadJsonFile.Click += new System.EventHandler(this.tmiLoadJsonFile_Click);
             // 
             // tmiLoadJsonFiles
             // 
@@ -131,7 +140,7 @@
             this.tmiSaveJsonFile.Name = "tmiSaveJsonFile";
             this.tmiSaveJsonFile.Size = new System.Drawing.Size(216, 26);
             this.tmiSaveJsonFile.Text = "存取JSON檔案";
-            this.tmiSaveJsonFile.Click += new System.EventHandler(this.tmiSaveJson_Click);
+            this.tmiSaveJsonFile.Click += new System.EventHandler(this.tmiSaveJsonFile_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -168,7 +177,7 @@
             this.pnlMain.AutoScroll = true;
             this.pnlMain.Location = new System.Drawing.Point(685, 40);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(402, 660);
+            this.pnlMain.Size = new System.Drawing.Size(402, 571);
             this.pnlMain.TabIndex = 4;
             // 
             // imlMain
@@ -338,6 +347,7 @@
             this.tmiSaveJsonFiles.Name = "tmiSaveJsonFiles";
             this.tmiSaveJsonFiles.Size = new System.Drawing.Size(216, 26);
             this.tmiSaveJsonFiles.Text = "存取JSON資料夾";
+            this.tmiSaveJsonFiles.Click += new System.EventHandler(this.tmiSaveJsonFiles_Click);
             // 
             // cmsMain
             // 
@@ -361,11 +371,34 @@
             this.tmiDeleteJsonFile.Size = new System.Drawing.Size(173, 24);
             this.tmiDeleteJsonFile.Text = "刪除JSON檔案";
             // 
+            // tmiCloseAllJsonFiles
+            // 
+            this.tmiCloseAllJsonFiles.Enabled = false;
+            this.tmiCloseAllJsonFiles.Name = "tmiCloseAllJsonFiles";
+            this.tmiCloseAllJsonFiles.Size = new System.Drawing.Size(216, 26);
+            this.tmiCloseAllJsonFiles.Text = "關閉所有檔案";
+            this.tmiCloseAllJsonFiles.Click += new System.EventHandler(this.tmiCloseAllJsonFiles_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(213, 6);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 6);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(213, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 743);
+            this.ClientSize = new System.Drawing.Size(1272, 740);
             this.Controls.Add(this.btnUpdateFileInfo);
             this.Controls.Add(this.pnlFielInfo);
             this.Controls.Add(this.libLines);
@@ -425,6 +458,10 @@
         private System.Windows.Forms.ContextMenuStrip cmsMain;
         private System.Windows.Forms.ToolStripMenuItem tmiNewJsonFile;
         private System.Windows.Forms.ToolStripMenuItem tmiDeleteJsonFile;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem tmiCloseAllJsonFiles;
     }
 }
 

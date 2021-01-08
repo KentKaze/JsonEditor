@@ -65,9 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JColumn.cs" />
-    <Compile Include="JLine.cs" />
     <Compile Include="JFileInfo.cs" />
     <Compile Include="JTable.cs" />
+    <Compile Include="JType.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
