@@ -75,6 +75,7 @@ namespace JsonEditor
         public JTable(string name, object jArray)
         {
             bool isFirst = true;
+            bool isFirstFirst = true;
 
             Name = name;
             if (jArray == null)
@@ -90,8 +91,14 @@ namespace JsonEditor
                 JObject jo = jt as JObject;
                 foreach (KeyValuePair<string, JToken> kvp in jo)
                 {
-                    if(isFirst)
-                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToString()));                    
+                    if(isFirstFirst)
+                    { 
+                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToString(), false, true));
+                        isFirstFirst = false;
+                    }
+                    else if(isFirst)
+                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToString()));
+                    
                     switch (kvp.Value.Type)
                     {
                         case JTokenType.Integer:                            
