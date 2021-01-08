@@ -12,7 +12,7 @@ namespace JsonEditor
 
         public string Name { get; set; }
         public List<JColumn> Columns { get; set; } = new List<JColumn>();
-        public List<Dictionary<string, object>> Lines { get; set; } = new List<Dictionary<string, object>>();
+        public List<Dictionary<string, object>> Lines { get; set; } = new List<Dictionary<string, object>>();        
 
         public int Count => ((IList<Dictionary<string, object>>)Lines).Count;
 
@@ -93,11 +93,14 @@ namespace JsonEditor
                 {
                     if (isFirstFirst)
                     {
-                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToJType().ToString(), false, true));
+                        JColumn jc = new JColumn(kvp.Key, kvp.Value.ToJType().ToString(), kvp.Key == "ID", true,
+                            Math.Abs(kvp.Value.ToString().Length / 50) + 1);
+                        Columns.Add(jc);
                         isFirstFirst = false;
                     }
                     else if (isFirst)
-                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToJType().ToString()));
+                        Columns.Add(new JColumn(kvp.Key, kvp.Value.ToJType().ToString(), kvp.Key == "ID", false,
+                            Math.Abs(kvp.Value.ToString().Length / 50) + 1));
 
                     switch (kvp.Value.Type)
                     {
@@ -107,15 +110,15 @@ namespace JsonEditor
                         case JTokenType.Float:
                             items.Add(kvp.Key, Convert.ToDouble(kvp.Value));
                             break;
+                        case JTokenType.Guid:
+                            items.Add(kvp.Key, Guid.Parse(kvp.Value.ToString()));
+                            break;
                         case JTokenType.Null:
                             items.Add(kvp.Key, null);
                             break;
                         case JTokenType.Boolean:
                             items.Add(kvp.Key, Convert.ToBoolean(kvp.Value));
-                            break;
-                        case JTokenType.Guid:
-                            items.Add(kvp.Key, Guid.Parse(kvp.Value.ToString()));
-                            break;
+                            break;                        
                         case JTokenType.Date:
                             items.Add(kvp.Key, DateTime.Parse(kvp.Value.ToString()));
                             break;

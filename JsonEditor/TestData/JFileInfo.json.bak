@@ -5,17 +5,15 @@
       {
         "Name": "No",
         "IsKey": false,
-        "Type": "Long",
+        "Type": "Integer",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": true
       },
       {
         "Name": "Date",
         "IsKey": false,
         "Type": "Date",
-        "ForeignKey": null,
-        "NumberOfRows": 1,
+        "ForeignKey": "",
         "Display": false
       },
       {
@@ -23,7 +21,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 3,
         "Display": false
       },
       {
@@ -31,7 +28,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 10,
         "Display": false
       },
       {
@@ -39,7 +35,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       }
     ]
@@ -51,32 +46,28 @@
         "Name": "PersonID",
         "IsKey": false,
         "Type": "Guid",
-        "ForeignKey": null,
-        "NumberOfRows": 1,
+        "ForeignKey": "",
         "Display": true
       },
       {
         "Name": "BestowerID",
         "IsKey": false,
-        "Type": "Guid",
+        "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
         "Name": "MoralRank",
         "IsKey": false,
         "Type": "Long",
-        "ForeignKey": null,
-        "NumberOfRows": 1,
+        "ForeignKey": "",
         "Display": false
       },
       {
         "Name": "BestowDateTime",
         "IsKey": false,
-        "Type": "Date",
+        "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -84,7 +75,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -92,7 +82,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       }
     ]
@@ -102,10 +91,9 @@
     "Columns": [
       {
         "Name": "ID",
-        "IsKey": true,
-        "Type": "Guid",
+        "IsKey": false,
+        "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": true
       },
       {
@@ -113,7 +101,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -121,7 +108,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -129,7 +115,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -137,7 +122,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -145,7 +129,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -153,7 +136,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -161,7 +143,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -169,7 +150,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -177,7 +157,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -185,7 +164,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -193,7 +171,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -201,7 +178,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -209,7 +185,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -217,7 +192,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -225,7 +199,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -233,15 +206,13 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
         "Name": "MoralRank",
         "IsKey": false,
-        "Type": "Long",
+        "Type": "Integer",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -249,15 +220,13 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 2,
         "Display": false
       },
       {
         "Name": "LastBestowDate",
         "IsKey": false,
-        "Type": "Date",
+        "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -265,7 +234,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       }
     ]
@@ -276,25 +244,22 @@
       {
         "Name": "No",
         "IsKey": false,
-        "Type": "Long",
+        "Type": "Integer",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": true
       },
       {
         "Name": "Date",
         "IsKey": false,
-        "Type": "Date",
-        "ForeignKey": "",
-        "NumberOfRows": 1,
-        "Display": true
+        "Type": "String",
+        "ForeignKey": null,
+        "Display": false
       },
       {
         "Name": "Chinese",
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -302,7 +267,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       },
       {
@@ -310,7 +274,6 @@
         "IsKey": false,
         "Type": "String",
         "ForeignKey": null,
-        "NumberOfRows": 1,
         "Display": false
       }
     ]

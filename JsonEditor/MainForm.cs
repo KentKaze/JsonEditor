@@ -16,6 +16,7 @@ namespace JsonEditor
         private JTable selectedTable;
         private Dictionary<string, object> selectedLine;
         private string currentFilesPath;
+        private bool dblClick;
 
         public MainForm()
         {
@@ -33,8 +34,6 @@ namespace JsonEditor
 
         private void tmiLoadJsonDirectory_Click(object sender, EventArgs e)
         {
-
-
             List<JFileInfo> jfis = new List<JFileInfo>();
 #if DEBUG
             fbdMain.SelectedPath = @"C:\Programs\WinForm\JsonEditor\JsonEditor\TestData";
@@ -64,7 +63,7 @@ namespace JsonEditor
                 }
 
                 //有JFileInfo的話相連
-                if (jfis != null)
+                if (jfis.Count != 0)
                     foreach(JTable jt in tables.Values)
                         jt.LoadFileInfo(jfis.Find(m => m.Name == jt.Name));
 
@@ -126,6 +125,7 @@ namespace JsonEditor
 
         private void RefreshPnlMainUI()
         {
+            int lines = 0;
             pnlMain.Controls.Clear();
             for(int i = 0; i < selectedTable.Columns.Count; i++)
             {
@@ -133,7 +133,8 @@ namespace JsonEditor
                 lblLabel.Name = string.Concat("lbl", selectedTable.Columns[i].Name);
                 lblLabel.Text = selectedTable.Columns[i].Name;
                 lblLabel.Left = 10;
-                lblLabel.Top = 30 * i;
+                lblLabel.Top = 30 * lines;
+
                 pnlMain.Controls.Add(lblLabel);
 
                 TextBox txtText = new TextBox();
@@ -144,7 +145,11 @@ namespace JsonEditor
                 //        txtText.Enabled = false;
                 txtText.Name = string.Concat("txt", selectedTable.Columns[i].Name);
                 txtText.Left = 200;
-                txtText.Top = 30 * i;
+                txtText.Top = 30 * lines;
+                txtText.Width = 200;
+                txtText.Height = 27 * selectedTable.Columns[i].NumberOfRows;                
+                txtText.Multiline = true;
+                lines += selectedTable.Columns[i].NumberOfRows;                
                 pnlMain.Controls.Add(txtText);
             }
         }
@@ -182,7 +187,8 @@ namespace JsonEditor
                 txtColumnName.Text = selectedColumn.Name;
                 chbDisplay.Checked = selectedColumn.Display;
                 chbIsKey.Checked = selectedColumn.IsKey;
-                txtForeigney.Text = selectedColumn.ForeignKey;
+                txtForeignKey.Text = selectedColumn.ForeignKey;
+                txtNumberOfRows.Text = selectedColumn.NumberOfRows.ToString();
                 btnUpdateFileInfo.Enabled = true;
             }
             else
@@ -191,7 +197,8 @@ namespace JsonEditor
                 cobColumnType.SelectedIndex = -1;
                 chbDisplay.Checked = false;
                 chbIsKey.Checked = false;
-                txtForeigney.Text = "";
+                txtForeignKey.Text = "";
+                txtNumberOfRows.Text = "0";
                 btnUpdateFileInfo.Enabled = false;
             }
         }
@@ -200,7 +207,6 @@ namespace JsonEditor
         {
             if (e.Node.Parent == null)           
             {
-                //selectedTable = tables[e.Node.Tag.ToString()];
                 selectedColumn = null;                
                 RefreshPnlFileInfoUI();
             }
@@ -213,17 +219,26 @@ namespace JsonEditor
 
         private void libLines_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (libLines.SelectedIndex == -1)
+                return;
             selectedLine = selectedTable[libLines.SelectedIndex];
             RefreshPnlMainValue();
         }
 
         private void btnUpdateFileInfo_Click(object sender, EventArgs e)
-        {
+        {   
+            if (!int.TryParse(txtNumberOfRows.Text, out int i))
+            {     
+                MessageBox.Show("欄位行數數值不正確");
+                return;
+            }
+
             selectedColumn.Type = cobColumnType.SelectedValue.ToString();
             selectedColumn.Name = txtColumnName.Text;
             selectedColumn.Display = chbDisplay.Checked;
             selectedColumn.IsKey = chbIsKey.Checked;
-            selectedColumn.ForeignKey = string.IsNullOrEmpty(txtForeigney.Text) ? txtForeigney.Text : null;
+            selectedColumn.NumberOfRows = Convert.ToInt32(txtNumberOfRows.Text);
+            selectedColumn.ForeignKey = string.IsNullOrEmpty(txtForeignKey.Text) ? txtForeignKey.Text : null;
             sslMain.Text = $"欄位「{selectedColumn.Name}」已更新";
             RefreshJsonFilesUI();
             RefreshLibLinesUI();
@@ -286,6 +301,7 @@ namespace JsonEditor
 
         private void trvJsonFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            
             if (e.Node.Parent == null)
             {
                 selectedTable = tables[e.Node.Tag.ToString()];
@@ -300,6 +316,23 @@ namespace JsonEditor
                 //selectedColumn = tables[e.Node.Parent.Tag.ToString()].Columns.Find(t => t.Name == e.Node.Tag.ToString());
                 //RefreshPnlFileInfoUI();
             }
+        }
+
+        private void trvJsonFiles_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            if (dblClick)
+                e.Cancel = true;            
+        }
+
+        private void trvJsonFiles_MouseDown(object sender, MouseEventArgs e)
+        {
+            dblClick = e.Button == MouseButtons.Left && e.Clicks >= 2;
+        }
+
+        private void trvJsonFiles_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            if (dblClick)
+                e.Cancel = true;
         }
     }
 }

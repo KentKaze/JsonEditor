@@ -26,18 +26,23 @@ namespace JsonEditor
 
     public static class Extentions
     {
-        public static JType ToJType(this JTokenType jtt)
+        public static JType ToJType(this JToken jt)
         {
-            switch (jtt)
+            
+            switch (jt.Type)
             {
                 case JTokenType.None:
                     return JType.None;
-                case JTokenType.Integer:
+                case JTokenType.Integer:                    
                     return JType.Long;
-                case JTokenType.String:
-                    return JType.String;
                 case JTokenType.Float:
                     return JType.Double;
+                case JTokenType.String:
+                    if(Guid.TryParse(jt.ToString(), out Guid guid))
+                        return JType.Guid;
+                    else if(DateTime.TryParse(jt.ToString(), out DateTime datetime))
+                        return JType.Date;                    
+                    return JType.String;
                 case JTokenType.Guid:
                     return JType.Guid;
                 case JTokenType.Date:
