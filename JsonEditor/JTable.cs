@@ -93,11 +93,11 @@ namespace JsonEditor
                 {
                     if (isFirstFirst)
                     {
-                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToString(), false, true));
+                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToJType().ToString(), false, true));
                         isFirstFirst = false;
                     }
                     else if (isFirst)
-                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToString()));
+                        Columns.Add(new JColumn(kvp.Key, kvp.Value.Type.ToJType().ToString()));
 
                     switch (kvp.Value.Type)
                     {
@@ -161,34 +161,5 @@ namespace JsonEditor
             jfi.Columns = jcs;
             return jfi;
         }
-
-        //public static implicit operator JTable(JArray data)
-        //{
-        //    JTable result = new JTable();
-
-        //    foreach (KeyValuePair<string, object> kvp in data)
-        //    {
-        //        result.Name = 
-
-
-        //    //    JArray jr = kvp.Value as JArray;
-        //    //    JToken jt = jr.First as JToken;
-
-        //    //    JObject jo = jt as JObject;
-        //    //    foreach (KeyValuePair<string, JToken> kvp2 in jo)
-        //    //    {
-        //    //        //FileNode.Nodes.Add(new TreeNode(kvp2.Key));
-        //    //    }
-
-        //    //}
-        //    return new JTable();
-        //}
-
-        //public static implicit operator JTable(JArray data)
-        //{
-        //    JTable result = new JTable();
-
-        //    return new JTable();
-        //}
     }
 }

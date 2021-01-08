@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace JsonEditor
@@ -19,7 +20,7 @@ namespace JsonEditor
         public MainForm()
         {
             InitializeComponent();
-            cobColumnType.DataSource = Enum.GetNames(typeof(JTokenType));
+            cobColumnType.DataSource = Enum.GetNames(typeof(JType));
             cobColumnType.SelectedIndex = -1;
         }
 
@@ -106,9 +107,46 @@ namespace JsonEditor
             
         }
 
-        private void RefreshPnlMain()
-        {
+        private void RefreshPnlMainValue()
+        {            
+            foreach(Control ctls in pnlMain.Controls)
+                if(ctls is TextBox)
+                    ((TextBox)ctls).Text = "";
 
+            if (selectedLine == null)
+                return;
+
+            foreach(KeyValuePair<string, object> kvp in selectedLine)
+            {
+                TextBox tb = pnlMain.Controls.Find($"txt{kvp.Key}", false)[0] as TextBox;
+                if (tb != null)
+                    tb.Text = kvp.Value.ToString();
+            }
+        }
+
+        private void RefreshPnlMainUI()
+        {
+            pnlMain.Controls.Clear();
+            for(int i = 0; i < selectedTable.Columns.Count; i++)
+            {
+                Label lblLabel = new Label();
+                lblLabel.Name = string.Concat("lbl", selectedTable.Columns[i].Name);
+                lblLabel.Text = selectedTable.Columns[i].Name;
+                lblLabel.Left = 10;
+                lblLabel.Top = 30 * i;
+                pnlMain.Controls.Add(lblLabel);
+
+                TextBox txtText = new TextBox();
+                //    if (pis[i].Name == "LastBestowDate" || pis[i].Name == "ID" ||
+                //        pis[i].Name == "PersonID")
+                //        txtText.Enabled = false;
+                //    if (pis[i].Name == "MoralRank" && CurrentModule == typeof(Person).ToString())
+                //        txtText.Enabled = false;
+                txtText.Name = string.Concat("txt", selectedTable.Columns[i].Name);
+                txtText.Left = 200;
+                txtText.Top = 30 * i;
+                pnlMain.Controls.Add(txtText);
+            }
         }
 
         private void RefreshLibLinesUI()
@@ -159,25 +197,24 @@ namespace JsonEditor
         }
 
         private void trvJsonFiles_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {           
+        {
             if (e.Node.Parent == null)           
             {
-                selectedTable = tables[e.Node.Tag.ToString()];
-                selectedColumn = null;
-                RefreshLibLinesUI();
+                //selectedTable = tables[e.Node.Tag.ToString()];
+                selectedColumn = null;                
                 RefreshPnlFileInfoUI();
             }
             else
             {   
                 selectedColumn = tables[e.Node.Parent.Tag.ToString()].Columns.Find(t => t.Name == e.Node.Tag.ToString());
-                btnUpdateFileInfo.Enabled = true;
                 RefreshPnlFileInfoUI();
             }
         }
 
         private void libLines_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            selectedLine = selectedTable[libLines.SelectedIndex];
+            RefreshPnlMainValue();
         }
 
         private void btnUpdateFileInfo_Click(object sender, EventArgs e)
@@ -189,6 +226,9 @@ namespace JsonEditor
             selectedColumn.ForeignKey = string.IsNullOrEmpty(txtForeigney.Text) ? txtForeigney.Text : null;
             sslMain.Text = $"欄位「{selectedColumn.Name}」已更新";
             RefreshJsonFilesUI();
+            RefreshLibLinesUI();
+            RefreshPnlMainUI();
+            RefreshPnlMainValue();
         }
 
         private void trvJsonFiles_AfterSelect(object sender, TreeViewEventArgs e)
@@ -242,6 +282,24 @@ namespace JsonEditor
         private void tmiLoadJsonFile_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void trvJsonFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Parent == null)
+            {
+                selectedTable = tables[e.Node.Tag.ToString()];
+                selectedColumn = null;
+                RefreshPnlFileInfoUI();
+                RefreshLibLinesUI();
+                RefreshPnlMainUI();
+                
+            }
+            else
+            {
+                //selectedColumn = tables[e.Node.Parent.Tag.ToString()].Columns.Find(t => t.Name == e.Node.Tag.ToString());
+                //RefreshPnlFileInfoUI();
+            }
         }
     }
 }

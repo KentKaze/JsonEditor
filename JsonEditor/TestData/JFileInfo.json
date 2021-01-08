@@ -59,8 +59,8 @@
       {
         "Name": "MoralRank",
         "IsKey": false,
-        "Type": "Integer",
-        "ForeignKey": null,
+        "Type": "Long",
+        "ForeignKey": "",
         "Display": false
       },
       {

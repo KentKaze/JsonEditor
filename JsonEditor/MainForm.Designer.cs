@@ -171,6 +171,7 @@
             this.trvJsonFiles.TabIndex = 3;
             this.trvJsonFiles.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvJsonFiles_AfterSelect);
             this.trvJsonFiles.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trvJsonFiles_NodeMouseClick);
+            this.trvJsonFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trvJsonFiles_NodeMouseDoubleClick);
             // 
             // pnlMain
             // 
