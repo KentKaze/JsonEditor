@@ -66,7 +66,7 @@ namespace JsonEditor
                         jt.LoadFileInfo(jfis.Find(m => m.Name == jt.Name));
 
                 RefreshJsonFilesUI();
-                sspMain.Text = $"{tables.Count} 檔案已讀入";
+                sslMain.Text = $"{tables.Count} 檔案已讀入";
             }
         }
 
@@ -319,11 +319,11 @@ namespace JsonEditor
                 using (FileStream fs = new FileStream(Path.Combine(currentFilesPath, $"{jt.Name}.json"), FileMode.Create))
                 {
                     StreamWriter sw = new StreamWriter(fs);
-                    sw.Write(JsonConvert.SerializeObject(jt.GetJsonObject()));
+                    sw.Write(JsonConvert.SerializeObject(jt.GetJsonObject(), Formatting.Indented));
                     sw.Close();
                 }
             }
-            sslMain.Text = $"{currentFilesPath}..所有檔案已存檔";
+            sslMain.Text = $"\"{currentFilesPath}\"所有檔案已存檔";
         }
 
         private void tmiCloseAllJsonFiles_Click(object sender, EventArgs e)
@@ -337,6 +337,7 @@ namespace JsonEditor
             RefreshPnlFileInfoUI();
             RefreshLibLinesUI();
             RefreshPnlMainUI();
+            sslMain.Text = "";
         }
 
         private void tmiLoadJsonFile_Click(object sender, EventArgs e)
@@ -409,26 +410,37 @@ namespace JsonEditor
             List<JFileInfo> jfis = new List<JFileInfo>();
 #if DEBUG
             fbdMain.SelectedPath = @"C:\Programs\WinForm\JsonEditor\JsonEditor\TestData";
-#endif
+#endif      
             DialogResult dr = fbdMain.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
+                
                 string[] jsonfiles = Directory.GetFiles(fbdMain.SelectedPath, "*.json");
                 if (jsonfiles.Length > 0)
                 {
-                    dr = MessageBox.Show("此文件已有現存JSON檔案，是否要清空資料夾", "清空Json檔案", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (dr == DialogResult.Yes)
-                    {
-                        foreach (string s in jsonfiles)
-                            File.Delete(s);
-                    }
+                    if (jsonfiles.Length == 1 && jsonfiles[0] == Path.Combine(fbdMain.SelectedPath, linkFileName))
+                        File.Delete(jsonfiles[0]);
                     else
-                        return;
+                    {
+                        if(File.Exists(Path.Combine(fbdMain.SelectedPath, linkFileName)))
+                            dr = MessageBox.Show($"此文件已有現存{jsonfiles.Length - 1} JSON檔案，是否要清空資料夾", "清空Json檔案", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        else
+                            dr = MessageBox.Show($"此文件已有現存{jsonfiles.Length} JSON檔案，是否要清空資料夾", "清空Json檔案", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.Yes)
+                        {
+                            foreach (string s in jsonfiles)
+                                File.Delete(s);
+                        }
+                        else
+                            return;
+                    }
                 }
 
+                tmiCloseAllJsonFiles_Click(this, e);
+                tables = new Dictionary<string, JTable>();
                 currentFilesPath = fbdMain.SelectedPath;
                 tmiCloseAllJsonFiles.Enabled = true;
-                sslMain.Text = "已新建檔案資料夾";
+                sslMain.Text = $"已在\"{fbdMain.SelectedPath}\"新建檔案資料夾";
             }
         }
 
