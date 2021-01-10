@@ -15,9 +15,10 @@ namespace JsonEditor
         Long,
         Double,
         String,
-        Boolean,
-        Null,
+        Boolean,        
         Date,
+        Time,
+        DateTime,
         Guid,
         Uri,
         TimeSpan,
@@ -26,6 +27,11 @@ namespace JsonEditor
 
     public static class Extentions
     {
+        //public static JType Parse(this JType jt, string str)
+        //{
+        //    return JType.Byte;
+        //}
+
         public static JType ToJType(this JToken jt)
         {
             
@@ -38,21 +44,29 @@ namespace JsonEditor
                 case JTokenType.Float:
                     return JType.Double;
                 case JTokenType.String:
-                    if(Guid.TryParse(jt.ToString(), out Guid guid))
+                    if (Guid.TryParse(jt.ToString(), out Guid guid))
                         return JType.Guid;
-                    else if(DateTime.TryParse(jt.ToString(), out DateTime datetime))
-                        return JType.Date;                    
+                    else if (DateTime.TryParse(jt.ToString(), out DateTime datetime))
+                    {
+                        //不嚴謹
+                        if (jt.ToString().Length > 10)
+                            return JType.DateTime;
+                        else if (datetime.TimeOfDay.TotalSeconds == 0)
+                            return JType.Date;
+                        else
+                            return JType.Time;
+                    }   
                     return JType.String;
                 case JTokenType.Guid:
                     return JType.Guid;
                 case JTokenType.Date:
-                    return JType.Date;
+                    return JType.Date;                
                 case JTokenType.TimeSpan:
                     return JType.TimeSpan;
                 case JTokenType.Uri:
                     return JType.Uri;
                 case JTokenType.Null:
-                    return JType.Null;                
+                    return JType.String; //Return String
                 default:
                     return JType.Undefied;
             }

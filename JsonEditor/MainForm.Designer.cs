@@ -56,6 +56,8 @@
             this.pnlMain = new System.Windows.Forms.Panel();
             this.libLines = new System.Windows.Forms.ListBox();
             this.pnlFielInfo = new System.Windows.Forms.Panel();
+            this.txtNumberOfRows = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtForeignKey = new System.Windows.Forms.TextBox();
             this.btnForeignKey = new System.Windows.Forms.Button();
             this.chbDisplay = new System.Windows.Forms.CheckBox();
@@ -68,8 +70,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbl1 = new System.Windows.Forms.Label();
             this.btnUpdateFileInfo = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtNumberOfRows = new System.Windows.Forms.TextBox();
+            this.btnUpdateMain = new System.Windows.Forms.Button();
+            this.btnClearMain = new System.Windows.Forms.Button();
             this.sspMain.SuspendLayout();
             this.mspMain.SuspendLayout();
             this.cmsMain.SuspendLayout();
@@ -125,69 +127,69 @@
             // tmiNewJsonFiles
             // 
             this.tmiNewJsonFiles.Name = "tmiNewJsonFiles";
-            this.tmiNewJsonFiles.Size = new System.Drawing.Size(216, 26);
+            this.tmiNewJsonFiles.Size = new System.Drawing.Size(194, 26);
             this.tmiNewJsonFiles.Text = "新建JSON資料夾";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(191, 6);
             // 
             // tmiLoadJsonFile
             // 
             this.tmiLoadJsonFile.Name = "tmiLoadJsonFile";
-            this.tmiLoadJsonFile.Size = new System.Drawing.Size(216, 26);
+            this.tmiLoadJsonFile.Size = new System.Drawing.Size(194, 26);
             this.tmiLoadJsonFile.Text = "讀取JSON檔案";
             this.tmiLoadJsonFile.Click += new System.EventHandler(this.tmiLoadJsonFile_Click);
             // 
             // tmiLoadJsonFiles
             // 
             this.tmiLoadJsonFiles.Name = "tmiLoadJsonFiles";
-            this.tmiLoadJsonFiles.Size = new System.Drawing.Size(216, 26);
+            this.tmiLoadJsonFiles.Size = new System.Drawing.Size(194, 26);
             this.tmiLoadJsonFiles.Text = "讀取JSON資料夾";
             this.tmiLoadJsonFiles.Click += new System.EventHandler(this.tmiLoadJsonDirectory_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(191, 6);
             // 
             // tmiSaveJsonFile
             // 
             this.tmiSaveJsonFile.Name = "tmiSaveJsonFile";
-            this.tmiSaveJsonFile.Size = new System.Drawing.Size(216, 26);
+            this.tmiSaveJsonFile.Size = new System.Drawing.Size(194, 26);
             this.tmiSaveJsonFile.Text = "存取JSON檔案";
             this.tmiSaveJsonFile.Click += new System.EventHandler(this.tmiSaveJsonFile_Click);
             // 
             // tmiSaveJsonFiles
             // 
             this.tmiSaveJsonFiles.Name = "tmiSaveJsonFiles";
-            this.tmiSaveJsonFiles.Size = new System.Drawing.Size(216, 26);
+            this.tmiSaveJsonFiles.Size = new System.Drawing.Size(194, 26);
             this.tmiSaveJsonFiles.Text = "存取JSON資料夾";
             this.tmiSaveJsonFiles.Click += new System.EventHandler(this.tmiSaveJsonFiles_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(191, 6);
             // 
             // tmiCloseAllJsonFiles
             // 
             this.tmiCloseAllJsonFiles.Enabled = false;
             this.tmiCloseAllJsonFiles.Name = "tmiCloseAllJsonFiles";
-            this.tmiCloseAllJsonFiles.Size = new System.Drawing.Size(216, 26);
+            this.tmiCloseAllJsonFiles.Size = new System.Drawing.Size(194, 26);
             this.tmiCloseAllJsonFiles.Text = "關閉所有檔案";
             this.tmiCloseAllJsonFiles.Click += new System.EventHandler(this.tmiCloseAllJsonFiles_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(191, 6);
             // 
             // tmiExit
             // 
             this.tmiExit.Name = "tmiExit";
-            this.tmiExit.Size = new System.Drawing.Size(216, 26);
+            this.tmiExit.Size = new System.Drawing.Size(194, 26);
             this.tmiExit.Text = "離開";
             this.tmiExit.Click += new System.EventHandler(this.tmiExit_Click);
             // 
@@ -289,6 +291,26 @@
             this.pnlFielInfo.Size = new System.Drawing.Size(278, 223);
             this.pnlFielInfo.TabIndex = 6;
             // 
+            // txtNumberOfRows
+            // 
+            this.txtNumberOfRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNumberOfRows.Location = new System.Drawing.Point(227, 79);
+            this.txtNumberOfRows.Name = "txtNumberOfRows";
+            this.txtNumberOfRows.Size = new System.Drawing.Size(36, 27);
+            this.txtNumberOfRows.TabIndex = 15;
+            this.txtNumberOfRows.Text = "0";
+            this.txtNumberOfRows.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(18, 82);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 20);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "欄位行數";
+            // 
             // txtForeignKey
             // 
             this.txtForeignKey.Enabled = false;
@@ -340,6 +362,7 @@
             this.txtColumnName.Name = "txtColumnName";
             this.txtColumnName.Size = new System.Drawing.Size(118, 27);
             this.txtColumnName.TabIndex = 0;
+            this.txtColumnName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
@@ -402,30 +425,35 @@
             this.btnUpdateFileInfo.UseVisualStyleBackColor = true;
             this.btnUpdateFileInfo.Click += new System.EventHandler(this.btnUpdateFileInfo_Click);
             // 
-            // label5
+            // btnUpdateMain
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 82);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 20);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "欄位行數";
+            this.btnUpdateMain.Enabled = false;
+            this.btnUpdateMain.Location = new System.Drawing.Point(1138, 703);
+            this.btnUpdateMain.Name = "btnUpdateMain";
+            this.btnUpdateMain.Size = new System.Drawing.Size(122, 40);
+            this.btnUpdateMain.TabIndex = 8;
+            this.btnUpdateMain.Text = "更新";
+            this.btnUpdateMain.UseVisualStyleBackColor = true;
+            this.btnUpdateMain.Click += new System.EventHandler(this.btnUpdateMain_Click);
             // 
-            // txtNumberOfRows
+            // btnClearMain
             // 
-            this.txtNumberOfRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumberOfRows.Location = new System.Drawing.Point(227, 79);
-            this.txtNumberOfRows.Name = "txtNumberOfRows";
-            this.txtNumberOfRows.Size = new System.Drawing.Size(36, 27);
-            this.txtNumberOfRows.TabIndex = 15;
-            this.txtNumberOfRows.Text = "0";
+            this.btnClearMain.Enabled = false;
+            this.btnClearMain.Location = new System.Drawing.Point(685, 703);
+            this.btnClearMain.Name = "btnClearMain";
+            this.btnClearMain.Size = new System.Drawing.Size(122, 40);
+            this.btnClearMain.TabIndex = 9;
+            this.btnClearMain.Text = "清空";
+            this.btnClearMain.UseVisualStyleBackColor = true;
+            this.btnClearMain.Click += new System.EventHandler(this.btnClearMain_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1272, 777);
+            this.Controls.Add(this.btnClearMain);
+            this.Controls.Add(this.btnUpdateMain);
             this.Controls.Add(this.btnUpdateFileInfo);
             this.Controls.Add(this.pnlFielInfo);
             this.Controls.Add(this.libLines);
@@ -491,6 +519,8 @@
         private System.Windows.Forms.ToolStripMenuItem tmiCloseAllJsonFiles;
         private System.Windows.Forms.TextBox txtNumberOfRows;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnUpdateMain;
+        private System.Windows.Forms.Button btnClearMain;
     }
 }
 

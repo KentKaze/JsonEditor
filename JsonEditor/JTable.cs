@@ -93,13 +93,13 @@ namespace JsonEditor
                 {
                     if (isFirstFirst)
                     {
-                        JColumn jc = new JColumn(kvp.Key, kvp.Value.ToJType().ToString(), kvp.Key == "ID", true,
+                        JColumn jc = new JColumn(kvp.Key, kvp.Value.ToJType(), kvp.Key == "ID", true,
                             Math.Abs(kvp.Value.ToString().Length / 50) + 1);
                         Columns.Add(jc);
                         isFirstFirst = false;
                     }
                     else if (isFirst)
-                        Columns.Add(new JColumn(kvp.Key, kvp.Value.ToJType().ToString(), kvp.Key == "ID", false,
+                        Columns.Add(new JColumn(kvp.Key, kvp.Value.ToJType(), kvp.Key == "ID", false,
                             Math.Abs(kvp.Value.ToString().Length / 50) + 1));
 
                     switch (kvp.Value.Type)
@@ -164,5 +164,65 @@ namespace JsonEditor
             jfi.Columns = jcs;
             return jfi;
         }
+
+        public object ParseValue(object inputValue, string columnName)
+        {
+            JType jt = Columns.Find(m => m.Name == columnName).Type;
+            switch (jt)
+            {
+                case JType.Boolean:
+                    return Convert.ToBoolean(inputValue);
+                case JType.Long:
+                    return Convert.ToInt64(inputValue);
+                case JType.Integer:
+                    return Convert.ToInt32(inputValue);
+                case JType.Double:
+                    return Convert.ToDouble(inputValue);
+                case JType.Byte:
+                    return Convert.ToByte(inputValue);
+                case JType.Date:
+                    return Convert.ToDateTime(inputValue).ToShortDateString();
+                case JType.Time:
+                    return Convert.ToDateTime(inputValue).TimeOfDay.ToString();
+                case JType.DateTime:
+                    return Convert.ToDateTime(inputValue);
+                case JType.String:
+                    return Convert.ToString(inputValue);
+                case JType.Guid:
+                    return Guid.Parse(inputValue.ToString());                        
+                default:
+                    return Convert.ChangeType(inputValue, Type.GetType(jt.ToString()));
+            }
+        }
+
+        //public Type GetTypeByColumnName(string name)
+        //{
+        //    JType jt = Columns.Find(m => m.Name == name).Type;
+        //    switch(jt)
+        //    {
+        //        case JType.Boolean:
+        //            return typeof(bool);
+        //        case JType.Long:
+        //            return typeof(long);
+        //        case JType.Integer:
+        //            return typeof(int);
+        //        case JType.Double:
+        //            return typeof(double);
+        //        case JType.Byte:
+        //            return typeof(byte);
+        //        case JType.Date:
+        //            return typeof(DateTime);
+        //        case JType.String:
+        //            return typeof(string);
+        //        //case JType.Guid
+        //        //    return typeof(Guid);                
+        //        default:
+        //            return Type.GetType(jt.ToString());
+        //    }
+        //    //Type result;
+        //    //Columns.Find(m => m.Name == name).Type;
+        //}
+            
+        
     }
 }

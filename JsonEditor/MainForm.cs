@@ -21,7 +21,7 @@ namespace JsonEditor
         public MainForm()
         {
             InitializeComponent();
-            cobColumnType.DataSource = Enum.GetNames(typeof(JType));
+            cobColumnType.DataSource = Enum.GetValues(typeof(JType));
             cobColumnType.SelectedIndex = -1;
         }
 
@@ -84,30 +84,36 @@ namespace JsonEditor
             if (tables == null)
                 return;
 
-            TreeNode fileNode;
+            TreeNode fileNode, tr;            
             Dictionary<string, string> fks = new Dictionary<string, string>();
             foreach (JTable jt in tables.Values)
             {
                 fileNode = new TreeNode(jt.Name, 0, 0);
+                trvJsonFiles.Nodes.Add(fileNode);
                 fileNode.Tag = jt.Name;                
                 foreach (JColumn jc in jt.Columns)
                 {
-                    fileNode.Nodes.Add(new TreeNode { Text = GetColumnNodeString(jc), Tag = jc.Name, ImageIndex = 1, SelectedImageIndex = 1 });
+                    tr = new TreeNode { Text = GetColumnNodeString(jc), Tag = jc.Name, ImageIndex = 1, SelectedImageIndex = 1 };
+                    fileNode.Nodes.Add(tr);
+                    if (selectedColumn == jc)
+                        trvJsonFiles.SelectedNode = tr;
                     if (!string.IsNullOrEmpty(jc.ForeignKey))
                         fks.Add(jc.Name, jc.ForeignKey);
                 }
 
                 foreach (KeyValuePair<string, string> kvp in fks)
                     fileNode.Nodes.Add(new TreeNode($"FK:{kvp.Key} -> {kvp.Value}", 1, 1));
-                trvJsonFiles.Nodes.Add(fileNode);
+                
             }
-
-            tmiCloseAllJsonFiles.Enabled = true;
             
+            tmiCloseAllJsonFiles.Enabled = true;            
         }
 
         private void RefreshPnlMainValue()
-        {            
+        {
+            btnClearMain.Enabled = false;
+            btnUpdateMain.Enabled = false;
+
             foreach(Control ctls in pnlMain.Controls)
                 if(ctls is TextBox)
                     ((TextBox)ctls).Text = "";
@@ -121,12 +127,18 @@ namespace JsonEditor
                 if (tb != null)
                     tb.Text = kvp.Value.ToString();
             }
+            btnClearMain.Enabled = true;
+            btnUpdateMain.Enabled = true;
         }
 
         private void RefreshPnlMainUI()
         {
+            btnClearMain.Enabled = false;
+            btnUpdateMain.Enabled = false;
             int lines = 0;
             pnlMain.Controls.Clear();
+            if (selectedTable == null)
+                return;
             for(int i = 0; i < selectedTable.Columns.Count; i++)
             {
                 Label lblLabel = new Label();
@@ -152,6 +164,8 @@ namespace JsonEditor
                 lines += selectedTable.Columns[i].NumberOfRows;                
                 pnlMain.Controls.Add(txtText);
             }
+            btnClearMain.Enabled = true;
+            btnUpdateMain.Enabled = true;
         }
 
         private void RefreshLibLinesUI()
@@ -177,6 +191,9 @@ namespace JsonEditor
                 }
                 libLines.Items.Add(displayString);
             }
+
+            if (selectedLine != null)
+                libLines.SelectedIndex = selectedTable.Lines.FindIndex(m => m == selectedLine);
         }
 
         private void RefreshPnlFileInfoUI()
@@ -233,7 +250,7 @@ namespace JsonEditor
                 return;
             }
 
-            selectedColumn.Type = cobColumnType.SelectedValue.ToString();
+            selectedColumn.Type = (JType)cobColumnType.SelectedValue;
             selectedColumn.Name = txtColumnName.Text;
             selectedColumn.Display = chbDisplay.Checked;
             selectedColumn.IsKey = chbIsKey.Checked;
@@ -292,6 +309,7 @@ namespace JsonEditor
             RefreshJsonFilesUI();
             RefreshPnlFileInfoUI();
             RefreshLibLinesUI();
+            RefreshPnlMainUI();
         }
 
         private void tmiLoadJsonFile_Click(object sender, EventArgs e)
@@ -307,9 +325,8 @@ namespace JsonEditor
                 selectedTable = tables[e.Node.Tag.ToString()];
                 selectedColumn = null;
                 RefreshPnlFileInfoUI();
-                RefreshLibLinesUI();
                 RefreshPnlMainUI();
-                
+                RefreshLibLinesUI();
             }
             else
             {
@@ -333,6 +350,33 @@ namespace JsonEditor
         {
             if (dblClick)
                 e.Cancel = true;
+        }
+
+        private void btnUpdateMain_Click(object sender, EventArgs e)
+        {
+            TextBox tb;
+            foreach (Control c in pnlMain.Controls)
+            {
+                if (c as TextBox == null)
+                    continue;
+                tb = c as TextBox;                
+                selectedLine[tb.Name.Substring(3)] = selectedTable.ParseValue(tb.Text, tb.Name.Substring(3));                
+              
+            }
+            RefreshLibLinesUI();
+            sslMain.Text = "Data Updated";
+        }
+
+        private void btnClearMain_Click(object sender, EventArgs e)
+        {
+            TextBox tb;
+            foreach (Control c in pnlMain.Controls)
+            {
+                if (c as TextBox == null)
+                    continue;
+                tb = c as TextBox;
+                tb.Text = "";
+            }
         }
     }
 }
