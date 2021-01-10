@@ -48,7 +48,7 @@ namespace JsonEditor
                         return JType.Guid;
                     else if (DateTime.TryParse(jt.ToString(), out DateTime datetime))
                     {
-                        //不嚴謹
+                        //To do 不嚴謹
                         if (jt.ToString().Length > 10)
                             return JType.DateTime;
                         else if (datetime.TimeOfDay.TotalSeconds == 0)

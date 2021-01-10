@@ -285,17 +285,17 @@
         "Name": "Date",
         "IsKey": false,
         "Type": 7,
-        "ForeignKey": null,
+        "ForeignKey": "",
         "NumberOfRows": 1,
-        "Display": false
+        "Display": true
       },
       {
         "Name": "Chinese",
         "IsKey": false,
         "Type": 5,
-        "ForeignKey": null,
+        "ForeignKey": "",
         "NumberOfRows": 1,
-        "Display": false
+        "Display": true
       },
       {
         "Name": "English",

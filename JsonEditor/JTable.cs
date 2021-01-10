@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime;
+using System.Dynamic;
 
 namespace JsonEditor
 {
@@ -164,7 +165,31 @@ namespace JsonEditor
             jfi.Columns = jcs;
             return jfi;
         }
+        /// <summary>
+        /// 擷取存檔用的Data Object
+        /// </summary>
+        /// <returns></returns>
+        public object GetJsonObject()
+        {            
+            List<object> result = new List<object>();
+            foreach(Dictionary<string, object> l in Lines)
+            {                
+                var line = new ExpandoObject() as IDictionary<string, object>;
+                foreach (KeyValuePair<string, object> kvp in l)
+                {
+                    line.Add(kvp.Key, kvp.Value);                    
+                }
+                result.Add(line);
+            }
+            return result;
+        }
 
+        /// <summary>
+        /// 用欄位資訊確認末端值的型別並進行轉換
+        /// </summary>
+        /// <param name="inputValue">值</param>
+        /// <param name="columnName">欄位名</param>
+        /// <returns></returns>
         public object ParseValue(object inputValue, string columnName)
         {
             JType jt = Columns.Find(m => m.Name == columnName).Type;
@@ -194,35 +219,5 @@ namespace JsonEditor
                     return Convert.ChangeType(inputValue, Type.GetType(jt.ToString()));
             }
         }
-
-        //public Type GetTypeByColumnName(string name)
-        //{
-        //    JType jt = Columns.Find(m => m.Name == name).Type;
-        //    switch(jt)
-        //    {
-        //        case JType.Boolean:
-        //            return typeof(bool);
-        //        case JType.Long:
-        //            return typeof(long);
-        //        case JType.Integer:
-        //            return typeof(int);
-        //        case JType.Double:
-        //            return typeof(double);
-        //        case JType.Byte:
-        //            return typeof(byte);
-        //        case JType.Date:
-        //            return typeof(DateTime);
-        //        case JType.String:
-        //            return typeof(string);
-        //        //case JType.Guid
-        //        //    return typeof(Guid);                
-        //        default:
-        //            return Type.GetType(jt.ToString());
-        //    }
-        //    //Type result;
-        //    //Columns.Find(m => m.Name == name).Type;
-        //}
-            
-        
     }
 }
