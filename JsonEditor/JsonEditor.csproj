@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JColumn.cs" />
+    <Compile Include="JFilesInfo.cs" />
     <Compile Include="JFileInfo.cs" />
     <Compile Include="JTable.cs" />
     <Compile Include="JType.cs" />

@@ -1,0 +1,322 @@
+{
+  "Name": "\\TestData",
+  "DirectoryPath": "C:\\Programs\\WinForm\\JsonEditor\\JsonEditor\\TestData",
+  "FilesInfo": [
+    {
+      "Name": "Articles",
+      "Columns": [
+        {
+          "Name": "No",
+          "IsKey": false,
+          "Type": 3,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": true
+        },
+        {
+          "Name": "Date",
+          "IsKey": false,
+          "Type": 7,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Chinese",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 3,
+          "Display": false
+        },
+        {
+          "Name": "English",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 10,
+          "Display": false
+        },
+        {
+          "Name": "Japneses",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        }
+      ]
+    },
+    {
+      "Name": "BestowRecords",
+      "Columns": [
+        {
+          "Name": "PersonID",
+          "IsKey": false,
+          "Type": 10,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": true
+        },
+        {
+          "Name": "BestowerID",
+          "IsKey": false,
+          "Type": 10,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "MoralRank",
+          "IsKey": false,
+          "Type": 3,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "BestowDateTime",
+          "IsKey": false,
+          "Type": 9,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Reason",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Memo",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        }
+      ]
+    },
+    {
+      "Name": "Persons",
+      "Columns": [
+        {
+          "Name": "ID",
+          "IsKey": true,
+          "Type": 10,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": true
+        },
+        {
+          "Name": "Surname",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Name",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "OtherName",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "SurnameFirst",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Yomikata",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Gender",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Fiction",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Wanted",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Protected",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "TwitterAccount",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "FacebookAccount",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "InstagramAccount",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "From",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Group",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "IsAOMember",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "IsCelebrity",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "MoralRank",
+          "IsKey": false,
+          "Type": 3,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Description",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 2,
+          "Display": false
+        },
+        {
+          "Name": "LastBestowDate",
+          "IsKey": false,
+          "Type": 7,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "PicturePath",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        }
+      ]
+    },
+    {
+      "Name": "Quotes",
+      "Columns": [
+        {
+          "Name": "No",
+          "IsKey": false,
+          "Type": 3,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": true
+        },
+        {
+          "Name": "Date",
+          "IsKey": false,
+          "Type": 7,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Chinese",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "English",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        },
+        {
+          "Name": "Japneses",
+          "IsKey": false,
+          "Type": 5,
+          "ForeignKey": null,
+          "NumberOfRows": 1,
+          "Display": false
+        }
+      ]
+    }
+  ]
+}
