@@ -76,9 +76,9 @@
             this.tmiRenameJsonFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tmiCloseJsonFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tmiDeleteJsonFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDeleteColumn = new System.Windows.Forms.Button();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.tmiAddColumn = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDeleteColumn = new System.Windows.Forms.Button();
             this.sspMain.SuspendLayout();
             this.mspMain.SuspendLayout();
             this.cmsJsonFiles.SuspendLayout();
@@ -239,6 +239,7 @@
             this.imlMain.TransparentColor = System.Drawing.Color.Transparent;
             this.imlMain.Images.SetKeyName(0, "JsonIcon.png");
             this.imlMain.Images.SetKeyName(1, "ObjectIcon.png");
+            this.imlMain.Images.SetKeyName(2, "Directory.png");
             // 
             // cmsJsonFiles
             // 
@@ -492,16 +493,6 @@
             this.tmiDeleteJsonFile.Size = new System.Drawing.Size(138, 24);
             this.tmiDeleteJsonFile.Text = "刪除";
             // 
-            // btnDeleteColumn
-            // 
-            this.btnDeleteColumn.Enabled = false;
-            this.btnDeleteColumn.Location = new System.Drawing.Point(12, 703);
-            this.btnDeleteColumn.Name = "btnDeleteColumn";
-            this.btnDeleteColumn.Size = new System.Drawing.Size(122, 40);
-            this.btnDeleteColumn.TabIndex = 10;
-            this.btnDeleteColumn.Text = "刪除";
-            this.btnDeleteColumn.UseVisualStyleBackColor = true;
-            // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
@@ -512,6 +503,16 @@
             this.tmiAddColumn.Name = "tmiAddColumn";
             this.tmiAddColumn.Size = new System.Drawing.Size(138, 24);
             this.tmiAddColumn.Text = "增加欄位";
+            // 
+            // btnDeleteColumn
+            // 
+            this.btnDeleteColumn.Enabled = false;
+            this.btnDeleteColumn.Location = new System.Drawing.Point(12, 703);
+            this.btnDeleteColumn.Name = "btnDeleteColumn";
+            this.btnDeleteColumn.Size = new System.Drawing.Size(122, 40);
+            this.btnDeleteColumn.TabIndex = 10;
+            this.btnDeleteColumn.Text = "刪除";
+            this.btnDeleteColumn.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
